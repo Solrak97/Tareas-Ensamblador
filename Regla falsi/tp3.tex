@@ -1,0 +1,62 @@
+  \documentclass[12pt,letterpaper]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}    %Uso de tildes si desarrolla en Linux
+%\usepackage[latin1]{inputenc}   %Uso de tildes si desarrolla en Windows
+\usepackage{setspace} %define comandos \singlespacing, \onehalfspacing, \doublespacing
+\usepackage[left=1.5cm, right=1.5cm, top=1.5cm, bottom=1.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage[pdftex,
+	    breaklinks=true,
+	    linktocpage=true,
+	    pdfborder={0 0 0},
+	    pdftoolbar=true,
+	    colorlinks=true,
+	    linkcolor=blue,
+	    citecolor=blue,
+	    filecolor=blue,
+	    urlcolor=blue]{hyperref}
+
+\begin{document}
+
+\begin{tabular}{ccc}
+  \includegraphics[width=20mm]{ECCI.jpg}
+  \hfill
+  & 
+  \parbox{5.2in}{ \centering 
+                \textbf{Universidad de Costa Rica\\
+                Escuela de Ciencias de la Computación e Informática\\
+                CI-0118 Lenguaje Ensamblador, grupo 01\\
+                Fecha: 3/junio/2019, I ciclo lectivo 2019\\
+                \Large Tarea de Programación \# 3:\\
+                biblioteca de C en ensamblador y punto flotante}\\
+                \hrulefill
+                }  
+  & 
+  \includegraphics[width=20mm]{UCR.jpg}\\ ~\\
+ \end{tabular}
+
+ Queremos probar el uso de instrucciones de punto flotante en ensamblador, el uso del FPU (floating point unit) o coprocesador matemático, y la entrada y salida de datos a través de funciones scanf y printf de la biblioteca de C.
+ 
+ Como aplicación, vamos a programar el método de \emph{regula falsi} para resolver numéricamente ecuaciones de funciones continuas no lineales de una variable. Lea sobre el método en sitios de internet, tales como \url{https://es.wikipedia.org/wiki/M%C3%A9todo_de_la_regla_falsa}.
+ 
+ Como ejemplo, vamos a resolver la ecuación 
+ 
+ \[\sin\left(x\right)\ln\left(x^2\ +\ 1\right)\ +\ \frac{\left(3x^3-5x^2\ -x\ +1\right)}{x^4+1} = 0\]
+ 
+ a) Haga el gráfico de la función para que tenga una idea de los cambios de signo y dónde se localizan los ceros. Puede usar, por ejemplo, el sitio \url{https://www.desmos.com/calculator}
+ 
+ b) Escriba un programa en ensamblador que lea del teclado los puntos $a$ y $b$ en formato flotante de 64 bits que definen el intervalo $[a, b]$ en el cual hay un cero de la función. Las evaluaciones $f(a)$ y $f(b)$ deben ser de signo diferente. También debe leer un valor $\epsilon$ para el error máximo permitido, es decir, si $|f(c)| < \epsilon$, se considera que $c$ es un cero de la función que ya ha sido encontrado. Por ejemplo, sería aceptable un valor $\epsilon = 0.000001$ para tener al menos 5 dígitos de precisión en el cálculo del cero.
+ 
+ Las lecturas de $a$, $b$ y $\epsilon$ se realizan llamando a \texttt{scanf}. Si su programa encuentra un cero aproximado de $f(x) = 0$, lo va a imprimir, junto con el número de evaluaciones de $f(x)$ que tuvo que realizar para encontrarlo con la precisión deseada. Las impresiones se realizan mediante \texttt{printf}.
+ 
+ Trate de encontrar todos los ceros de la ecuación, aunque tenga que ejecutar el programa varias veces, con distintos intervalos $[a, b]$ en cada corrida. ¿Se aproximan estos ceros a las posiciones en el gráfico?
+ 
+ \vspace{1 cm}
+ Esta tarea se puede resolver en grupos de 2 personas. 
+Entregar en Moodle el lunes 17 de junio. Suba un archivo comprimido con los documentos en \LaTeX, código fuente en ensamblador, imágenes que comprueben la ejecución del programa y el pdf respectivo.
+
+\end{document}
+%------------------------------------------------------------

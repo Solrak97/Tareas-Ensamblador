@@ -1,0 +1,73 @@
+  \documentclass[12pt,letterpaper]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}    %Uso de tildes si desarrolla en Linux
+%\usepackage[latin1]{inputenc}   %Uso de tildes si desarrolla en Windows
+\usepackage{setspace} %define comandos \singlespacing, \onehalfspacing, \doublespacing
+\usepackage[left=1.5cm, right=1.5cm, top=1.5cm, bottom=1.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage[pdftex,
+	    breaklinks=true,
+	    linktocpage=true,
+	    pdfborder={0 0 0},
+	    pdftoolbar=true,
+	    colorlinks=true,
+	    linkcolor=blue,
+	    citecolor=blue,
+	    filecolor=blue,
+	    urlcolor=blue]{hyperref}
+
+\begin{document}
+
+\begin{tabular}{ccc}
+  \includegraphics[width=20mm]{ECCI.jpg}
+  \hfill
+  & 
+  \parbox{5.2in}{ \centering 
+                \textbf{Universidad de Costa Rica\\
+                Escuela de Ciencias de la Computación e Informática\\
+                CI-0118 Lenguaje Ensamblador, grupo 01\\
+                Fecha: 24/junio/2019, I ciclo lectivo 2019\\
+                \Large Tarea de Programación \# 4:\\
+                Recursividad}\\
+                \hrulefill
+                }  
+  & 
+  \includegraphics[width=20mm]{UCR.jpg}\\ ~\\
+ \end{tabular}
+  
+ \vspace{1 cm}
+ 
+Observe la siguiente función recursiva \texttt{fun} escrita en C, junto con el programa principal.
+
+\begin{verbatim}
+#include <stdio.h> 
+  
+void fun(int n) 
+{ 
+    if(n > 0) 
+    { 
+        fun(n-1); 
+        printf("%d ", n); 
+        fun(n-1); 
+    } 
+} 
+  
+int main() 
+{ 
+    fun(4); 
+    return 0; 
+} 
+ 
+\end{verbatim}
+
+Escriba la función \texttt{fun} en ensamblador. Escriba comentarios útiles en el código fuente de ensamblador. Explique en los comentarios cómo se administra el stack frame. Mantenga el programa principal en C. Compare los resultados de la función en ensamblador con los obtenidos si \texttt{fun} se mantiene en C.
+
+Esta tarea es individual.
+ 
+Entregar en Moodle el lunes 1 de julio. Suba un archivo comprimido con los documentos en \LaTeX, código fuente en ensamblador, imágenes que comprueben la ejecución del programa y el pdf respectivo.
+
+\end{document}
+%------------------------------------------------------------

@@ -1,0 +1,131 @@
+\documentclass[8pt,letterpapper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{float}   
+\usepackage{listings}
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=bash,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\begin{document}
+
+\title{Tarea I Lenguaje ensamblador, determinación de palindromos}
+\author{Luis Carlos Quesada Rodríguez, Lucía Elizondo.}
+\markboth{Tarea I Lenguaje ensamblador, Abril 2018}{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Journals}
+
+\maketitle
+
+\section{Introducción}
+Para la tarea I del curso Lenguaje ensamblador se lleva a cabo la creación de un algoritmo para determinar si una hilera es palíndromo. Para este problema se toman 8 hileras, se identifica si son palíndromos y se retorna el resultado a forma de \textit{EXIT\textunderscore status}, por lo que el numero decimal en el \textit{EXIT\textunderscore status} al convertirse a binario represente en cada dígito, con un 1 si la hilera fue palíndromo y con un 0 en caso de que no lo fuera. 
+
+\section{Funcionamiento}
+La comprobación de palíndromo funciona de la siguiente manera:
+\begin{enumerate}
+    \item Se toma la dirección de la ultima hilera como índice izquierdo. %1
+    \item Se busca la dirección del caracter 0 en esa hilera y se le resta 1 para tomarlo como índice derecho. %2
+    \item Se compara la dirección de los caracteres para ver si el izquierdo es mayor al derecho.    %3
+    \item Si el izquierdo es menor igual al derecho se considera palíndromo. %4
+    \item Se comparan los caracteres para comprobar su igualdad. %5
+    \item Si son iguales se suma uno al índice izquierdo y resta uno al índice derecho y vuelve al paso 3. %6
+    \item Si son diferentes, se considera que esta hilera no es palíndromo.
+\end{enumerate}
+
+Para la representación del dato se debe utilizar un único valor numérico entre 0 y 1023, pues debe ser representado en 8 bits por convenciones del sistema operativo. La limitación del sistema operativo nos obliga a utilizar 2 programas en vez de uno para representar las 16 hileras de caracteres por lo que los datos se dividen en dos secciones de 8 hileras. Durante la comprobación de palíndromos los resultados fueron almacenados uno a uno en la pila, de esta forma al extraerlos se encuentran de forma inversa, de la misma forma las hileras fueron recorridas de forma inversa para obtener los datos en orden de la siguiente forma:
+
+\begin{enumerate}
+    \item Se inicia un contador en 8 %1
+    \item Se toma un registro en 0. %2
+    \item Se hace un corrimiento de bits izquierdo de un bit. %3
+    \item Se hace un \textit{pop} en la pila.    %4
+    \item Se suma el resultado encontrado en la pila. %5
+    \item Se hace un loop al paso 3
+    \item Finalmente se guarda el resultado de las sumas y se retorna.
+\end{enumerate}
+
+Al ejecutar el programa, los bits que representan las hileras encuentran en el mismo orden que se introducen en la sección \textit{.data} del programa.
+
+\section{Compilación}
+    Para la compilación del programa se escribió el siguiente script, de forma que el código tanto de la parte A como la parte B es ensamblado y linkeado en una sola ejecución. 
+    
+\begin{lstlisting}
+#Ensamblar el programa con la primer mitad de los datos
+yasm -g dwarf2 -f elf64 parteA.asm -l ListaA.lst
+
+#Linkear el programa con la primer mitad de los datos
+gcc -static -o parteA parteA.o
+
+
+#Ensamblar el programa con la segunda mitad de los datos
+yasm -g dwarf2 -f elf64 parteB.asm -l ListaB.lst
+
+#Linkear el programa con la primer mitad de los datos
+gcc -static -o parteB parteB.o
+\end{lstlisting}
+
+El script se encuentra en el entregable con el nombre \textit{compile.sh}, para ser ejecutado simplemente debe utilizarse el siguiente comando. 
+\begin{lstlisting}
+./compile.sh
+\end{lstlisting}
+
+\section{Ejecución del programa}
+Para obtener los resultados del programa se utiliza la variable global de \textit{EXIT\textunderscore status} representada como \$?, cada programa debe ser ejecutado independientemente para obtener un código de salida de 8 bits. esto se puede lograr de la siguiente forma:
+\begin{lstlisting}
+#Ejecutar la parte A
+./parteA
+
+#Imprimir el valor de A
+echo $?
+
+#Ejecutar la parte B
+./parteB
+
+#Imprimir el valor de B
+echo $?
+\end{lstlisting}
+
+Sin embargo, para comodidad se creó un script llamado \textit{palin.sh} que se encuentra en el archivo entregable que ejecuta ambos programas y entrega un unico resultado.
+\begin{lstlisting}
+#Conseguir el codigo de A
+./parteA
+parteA=$?
+
+#Conseguir el codigo de B
+./parteB
+parteB=$?
+
+#Hacer Bitshift de 8 en A
+results=$(( parteA << 8 ))
+
+#Sumar A con B
+results=$(( results + parteB ))
+
+#print de los resultados
+echo $results
+\end{lstlisting}
+Como se puede ver, para el resultado final se corre A en 8 bits a la izquierda, luego se le suma B y de esta forma representa en 16 bits la totalidad de las hileras de datos.
+
+El resultado generado por el shell script devuelve 56749, lo cual es 11011101 10101101 en binario. Esto indica que la hilera0, hilera2, hilera3, hilera5, hilera7, hilera8, hilera10, hilera11, hilera12, hilera14, hilera15 son palíndromos. Las otras hileras: hilera1, hilera4, hilera6 ,hilera9, hilera13 no son palíndromos.
+
+\end{document}
+
+

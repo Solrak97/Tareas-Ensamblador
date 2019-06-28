@@ -1,0 +1,49 @@
+  \documentclass[12pt,letterpaper]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}    %Uso de tildes si desarrolla en Linux
+%\usepackage[latin1]{inputenc}   %Uso de tildes si desarrolla en Windows
+\usepackage{setspace} %define comandos \singlespacing, \onehalfspacing, \doublespacing
+\usepackage[left=1.5cm, right=1.5cm, top=1.5cm, bottom=1.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage[pdftex,
+	    breaklinks=true,
+	    linktocpage=true,
+	    pdfborder={0 0 0},
+	    pdftoolbar=true,
+	    colorlinks=true,
+	    linkcolor=blue,
+	    citecolor=blue,
+	    filecolor=blue,
+	    urlcolor=blue]{hyperref}
+
+\begin{document}
+
+\begin{tabular}{ccc}
+  \includegraphics[width=20mm]{ECCI.jpg}
+  \hfill
+  & 
+  \parbox{5.2in}{ \centering 
+                \textbf{Universidad de Costa Rica\\
+                Escuela de Ciencias de la Computación e Informática\\
+                CI-0118 Lenguaje Ensamblador, grupo 01\\
+                Fecha: 24/junio/2019, I ciclo lectivo 2019\\
+                \Large Tarea Corta \# 2:\\
+                Ingeniería en reversa}\\
+                \hrulefill
+                }  
+  & 
+  \includegraphics[width=20mm]{UCR.jpg}\\ ~\\
+ \end{tabular}
+
+ El programa ejecutable \texttt{guess1} pide leer un valor entero secreto (tipo pin). Si digita el valor correcto, imprime un mensaje de aceptación, junto con el número de intentos necesitados. Si digita un valor erróneo, imprime un mensaje de error.
+ 
+ Analice el programa con herramientas de ingeniería en reversa (gdb, ghex, etc) y trate de deducir el número correcto. 
+ 
+ Debe entregar un listado desensamblado, junto con las explicaciones (análisis) del caso que permitan entender cómo encontró el valor correcto.
+
+Esta tarea es individual. Entregar en Moodle el domingo 30 de junio.
+\end{document}
+%------------------------------------------------------------

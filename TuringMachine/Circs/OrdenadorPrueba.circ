@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project source="2.15.0.2.jar" version="1.0">
+This file is intended to be loaded by Logisim http://logisim.altervista.org
+<lib desc="#Wiring" name="0"/>
+  <lib desc="#Gates" name="1"/>
+  <lib desc="#TTL" name="2"/>
+  <lib desc="#Plexers" name="3">
+    <tool name="Multiplexer">
+      <a name="enable" val="false"/>
+    </tool>
+    <tool name="Demultiplexer">
+      <a name="enable" val="false"/>
+    </tool>
+    <tool name="Decoder">
+      <a name="enable" val="false"/>
+    </tool>
+  </lib>
+  <lib desc="#Arithmetic" name="4"/>
+  <lib desc="#Memory" name="5">
+    <tool name="ROM">
+      <a name="contents">addr/data: 8 8
+0
+</a>
+    </tool>
+  </lib>
+  <lib desc="#I/O" name="6"/>
+  <lib desc="#Base" name="7">
+    <tool name="Text Tool">
+      <a name="text" val=""/>
+      <a name="font" val="Dialog plain 12"/>
+      <a name="color" val="#000000"/>
+      <a name="halign" val="center"/>
+      <a name="valign" val="base"/>
+    </tool>
+  </lib>
+  <lib desc="file#/home/fignewton/Documents/Assembling/Project1/Logisim/ModuloOrdenador.circ" name="8"/>
+  <main name="main"/>
+  <options>
+    <a name="gateUndefined" val="ignore"/>
+    <a name="simlimit" val="1000"/>
+    <a name="simrand" val="0"/>
+  </options>
+  <mappings>
+    <tool lib="7" map="Button2" name="Poke Tool"/>
+    <tool lib="7" map="Button3" name="Menu Tool"/>
+    <tool lib="7" map="Ctrl Button1" name="Menu Tool"/>
+  </mappings>
+  <toolbar>
+    <tool lib="7" name="Poke Tool"/>
+    <tool lib="7" name="Edit Tool"/>
+    <sep/>
+    <tool lib="7" name="Text Tool">
+      <a name="text" val=""/>
+      <a name="font" val="Dialog plain 12"/>
+      <a name="color" val="#000000"/>
+      <a name="halign" val="center"/>
+      <a name="valign" val="base"/>
+    </tool>
+    <tool lib="0" name="Pin">
+      <a name="tristate" val="false"/>
+    </tool>
+    <tool lib="0" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </tool>
+    <tool lib="1" name="NOT Gate"/>
+    <tool lib="1" name="AND Gate"/>
+    <tool lib="1" name="OR Gate"/>
+  </toolbar>
+  <circuit name="main">
+    <a name="circuit" val="main"/>
+    <a name="clabel" val=""/>
+    <a name="clabelup" val="east"/>
+    <a name="clabelfont" val="Dialog plain 12"/>
+    <a name="clabelcolor" val="#000000"/>
+    <wire from="(440,360)" to="(610,360)"/>
+    <wire from="(610,300)" to="(610,360)"/>
+    <wire from="(440,360)" to="(440,370)"/>
+    <wire from="(490,280)" to="(520,280)"/>
+    <wire from="(520,280)" to="(520,310)"/>
+    <wire from="(520,310)" to="(590,310)"/>
+    <wire from="(590,300)" to="(590,310)"/>
+    <wire from="(490,260)" to="(540,260)"/>
+    <wire from="(490,240)" to="(520,240)"/>
+    <wire from="(520,210)" to="(520,240)"/>
+    <wire from="(520,210)" to="(700,210)"/>
+    <wire from="(700,210)" to="(700,260)"/>
+    <wire from="(680,260)" to="(700,260)"/>
+    <wire from="(390,250)" to="(420,250)"/>
+    <wire from="(390,250)" to="(390,260)"/>
+    <wire from="(370,260)" to="(390,260)"/>
+    <wire from="(390,270)" to="(420,270)"/>
+    <wire from="(390,270)" to="(390,320)"/>
+    <wire from="(210,320)" to="(390,320)"/>
+    <wire from="(210,260)" to="(210,320)"/>
+    <wire from="(210,260)" to="(230,260)"/>
+    <wire from="(630,300)" to="(630,340)"/>
+    <wire from="(460,300)" to="(460,320)"/>
+    <wire from="(440,300)" to="(440,360)"/>
+    <wire from="(460,350)" to="(480,350)"/>
+    <wire from="(460,340)" to="(460,350)"/>
+    <wire from="(480,300)" to="(480,350)"/>
+    <comp lib="5" loc="(370,260)" name="ROM">
+      <a name="addrWidth" val="15"/>
+      <a name="dataWidth" val="32"/>
+      <a name="contents">addr/data: 15 32
+40008 8001 30000 8003 32763*0 8007
+</a>
+    </comp>
+    <comp lib="5" loc="(680,260)" name="RAM">
+      <a name="addrWidth" val="15"/>
+      <a name="dataWidth" val="17"/>
+    </comp>
+    <comp lib="8" loc="(480,300)" name="Módulo Ordenador">
+      <a name="label" val="Ordenador"/>
+    </comp>
+    <comp lib="0" loc="(440,370)" name="Clock">
+      <a name="facing" val="north"/>
+    </comp>
+    <comp lib="0" loc="(630,340)" name="Pin">
+      <a name="facing" val="north"/>
+      <a name="tristate" val="false"/>
+    </comp>
+    <comp lib="1" loc="(460,320)" name="NOT Gate">
+      <a name="facing" val="north"/>
+    </comp>
+  </circuit>
+</project>

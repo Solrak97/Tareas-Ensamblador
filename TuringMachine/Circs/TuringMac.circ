@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project source="2.15.0.2.jar" version="1.0">
+  This file is intended to be loaded by Logisim http://logisim.altervista.org
+
+  <lib desc="#Wiring" name="0"/>
+  <lib desc="#Gates" name="1"/>
+  <lib desc="#Plexers" name="2">
+    <tool name="Multiplexer">
+      <a name="enable" val="false"/>
+    </tool>
+    <tool name="Demultiplexer">
+      <a name="enable" val="false"/>
+    </tool>
+    <tool name="Decoder">
+      <a name="enable" val="false"/>
+    </tool>
+  </lib>
+  <lib desc="#Arithmetic" name="3"/>
+  <lib desc="#Memory" name="4">
+    <tool name="ROM">
+      <a name="contents">addr/data: 8 8
+0
+</a>
+    </tool>
+  </lib>
+  <lib desc="#I/O" name="5"/>
+  <lib desc="#Base" name="6">
+    <tool name="Text Tool">
+      <a name="text" val=""/>
+      <a name="font" val="Dialog plain 12"/>
+      <a name="color" val="#000000"/>
+      <a name="halign" val="center"/>
+      <a name="valign" val="base"/>
+    </tool>
+  </lib>
+  <lib desc="file#Control.circ" name="7"/>
+  <lib desc="file#ModuloOrdenador.circ" name="8"/>
+  <lib desc="file#Direcion.circ" name="9"/>
+  <main name="Maquina de turing"/>
+  <options>
+    <a name="gateUndefined" val="ignore"/>
+    <a name="simlimit" val="1000"/>
+    <a name="simrand" val="0"/>
+  </options>
+  <mappings>
+    <tool lib="6" map="Button2" name="Poke Tool"/>
+    <tool lib="6" map="Button3" name="Menu Tool"/>
+    <tool lib="6" map="Ctrl Button1" name="Menu Tool"/>
+  </mappings>
+  <toolbar>
+    <tool lib="6" name="Poke Tool"/>
+    <tool lib="6" name="Edit Tool"/>
+    <tool lib="6" name="Text Tool">
+      <a name="text" val=""/>
+      <a name="font" val="Dialog plain 12"/>
+      <a name="color" val="#000000"/>
+      <a name="halign" val="center"/>
+      <a name="valign" val="base"/>
+    </tool>
+    <sep/>
+    <tool lib="0" name="Pin">
+      <a name="tristate" val="false"/>
+    </tool>
+    <tool lib="0" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="labelloc" val="east"/>
+    </tool>
+    <tool lib="1" name="NOT Gate"/>
+    <tool lib="1" name="AND Gate"/>
+    <tool lib="1" name="OR Gate"/>
+  </toolbar>
+  <circuit name="Maquina de turing">
+    <a name="circuit" val="Maquina de turing"/>
+    <a name="clabel" val=""/>
+    <a name="clabelup" val="east"/>
+    <a name="clabelfont" val="SansSerif plain 12"/>
+    <a name="clabelcolor" val="#000000"/>
+    <wire from="(260,60)" to="(270,60)"/>
+    <wire from="(110,60)" to="(120,60)"/>
+    <wire from="(630,60)" to="(650,60)"/>
+    <wire from="(630,120)" to="(650,120)"/>
+    <wire from="(680,130)" to="(700,130)"/>
+    <wire from="(610,140)" to="(650,140)"/>
+    <wire from="(700,100)" to="(700,130)"/>
+    <wire from="(80,520)" to="(100,520)"/>
+    <wire from="(180,320)" to="(210,320)"/>
+    <wire from="(140,420)" to="(200,420)"/>
+    <wire from="(80,400)" to="(100,400)"/>
+    <wire from="(140,380)" to="(180,380)"/>
+    <wire from="(180,320)" to="(180,380)"/>
+    <wire from="(200,360)" to="(200,420)"/>
+    <wire from="(140,520)" to="(170,520)"/>
+    <wire from="(140,540)" to="(170,540)"/>
+    <wire from="(140,470)" to="(170,470)"/>
+    <wire from="(140,490)" to="(170,490)"/>
+    <wire from="(90,450)" to="(90,490)"/>
+    <wire from="(70,490)" to="(90,490)"/>
+    <wire from="(90,490)" to="(100,490)"/>
+    <wire from="(200,360)" to="(220,360)"/>
+    <wire from="(240,360)" to="(270,360)"/>
+    <wire from="(140,400)" to="(260,400)"/>
+    <wire from="(270,410)" to="(270,450)"/>
+    <wire from="(270,360)" to="(270,370)"/>
+    <wire from="(90,450)" to="(270,450)"/>
+    <wire from="(340,470)" to="(400,470)"/>
+    <wire from="(530,390)" to="(550,390)"/>
+    <wire from="(290,390)" to="(310,390)"/>
+    <wire from="(450,390)" to="(500,390)"/>
+    <wire from="(440,490)" to="(460,490)"/>
+    <wire from="(400,430)" to="(400,470)"/>
+    <wire from="(510,410)" to="(510,450)"/>
+    <wire from="(380,430)" to="(380,450)"/>
+    <wire from="(270,450)" to="(380,450)"/>
+    <wire from="(460,400)" to="(460,490)"/>
+    <wire from="(460,400)" to="(500,400)"/>
+    <wire from="(800,60)" to="(810,60)"/>
+    <wire from="(790,60)" to="(800,60)"/>
+    <wire from="(800,140)" to="(860,140)"/>
+    <wire from="(800,60)" to="(800,140)"/>
+    <wire from="(380,450)" to="(510,450)"/>
+    <wire from="(170,230)" to="(200,230)"/>
+    <wire from="(180,150)" to="(200,150)"/>
+    <wire from="(180,170)" to="(200,170)"/>
+    <wire from="(180,190)" to="(200,190)"/>
+    <wire from="(170,210)" to="(170,230)"/>
+    <wire from="(100,180)" to="(110,180)"/>
+    <wire from="(100,160)" to="(110,160)"/>
+    <wire from="(40,230)" to="(40,450)"/>
+    <wire from="(40,450)" to="(90,450)"/>
+    <wire from="(40,230)" to="(130,230)"/>
+    <wire from="(130,210)" to="(130,230)"/>
+    <wire from="(150,210)" to="(150,280)"/>
+    <wire from="(130,280)" to="(150,280)"/>
+    <wire from="(170,230)" to="(170,310)"/>
+    <wire from="(70,310)" to="(170,310)"/>
+    <wire from="(70,280)" to="(90,280)"/>
+    <wire from="(70,280)" to="(70,310)"/>
+    <wire from="(70,260)" to="(70,280)"/>
+    <wire from="(70,260)" to="(90,260)"/>
+    <comp lib="8" loc="(170,210)" name="Módulo Ordenador"/>
+    <comp lib="0" loc="(170,490)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="B_Trigg"/>
+    </comp>
+    <comp lib="7" loc="(140,470)" name="Control"/>
+    <comp lib="0" loc="(200,170)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="width" val="15"/>
+      <a name="label" val="RAM II ADDR"/>
+    </comp>
+    <comp lib="0" loc="(630,120)" name="Tunnel">
+      <a name="label" val="Activador"/>
+    </comp>
+    <comp lib="6" loc="(55,238)" name="Text">
+      <a name="font" val="Dialog plain 12"/>
+    </comp>
+    <comp lib="4" loc="(890,140)" name="Register">
+      <a name="width" val="17"/>
+      <a name="label" val="IBR"/>
+    </comp>
+    <comp lib="0" loc="(80,520)" name="Tunnel">
+      <a name="label" val="Fin"/>
+    </comp>
+    <comp lib="4" loc="(450,390)" name="RAM">
+      <a name="addrWidth" val="10"/>
+      <a name="dataWidth" val="7"/>
+      <a name="label" val="RAM I"/>
+    </comp>
+    <comp lib="0" loc="(200,150)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="width" val="17"/>
+      <a name="label" val="RAM II DATA"/>
+    </comp>
+    <comp lib="0" loc="(170,540)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="D_Trigg"/>
+    </comp>
+    <comp lib="0" loc="(810,60)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="width" val="17"/>
+      <a name="label" val="RAM II DATA"/>
+    </comp>
+    <comp lib="9" loc="(140,380)" name="Direccion"/>
+    <comp lib="0" loc="(200,230)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="Fin"/>
+    </comp>
+    <comp lib="1" loc="(240,360)" name="NOT Gate"/>
+    <comp lib="0" loc="(270,60)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="width" val="32"/>
+      <a name="label" val="ROM DATA"/>
+    </comp>
+    <comp lib="0" loc="(200,190)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="Activador"/>
+    </comp>
+    <comp lib="0" loc="(100,180)" name="Tunnel">
+      <a name="width" val="15"/>
+      <a name="label" val="ROM ADDR"/>
+    </comp>
+    <comp lib="4" loc="(530,390)" name="Register">
+      <a name="width" val="7"/>
+      <a name="label" val="Symbol"/>
+    </comp>
+    <comp lib="0" loc="(170,520)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="E_Trigg"/>
+    </comp>
+    <comp lib="0" loc="(80,400)" name="Pin">
+      <a name="width" val="2"/>
+      <a name="tristate" val="false"/>
+    </comp>
+    <comp lib="6" loc="(259,293)" name="Text">
+      <a name="text" val="Aqui muere"/>
+      <a name="font" val="Dialog plain 12"/>
+    </comp>
+    <comp lib="1" loc="(680,130)" name="OR Gate"/>
+    <comp lib="0" loc="(610,140)" name="Tunnel">
+      <a name="label" val="RamII_Trig"/>
+    </comp>
+    <comp lib="0" loc="(110,60)" name="Tunnel">
+      <a name="width" val="15"/>
+      <a name="label" val="ROM ADDR"/>
+    </comp>
+    <comp lib="4" loc="(290,390)" name="Counter">
+      <a name="width" val="10"/>
+      <a name="max" val="0x3ff"/>
+      <a name="label" val="RAM PTR"/>
+    </comp>
+    <comp lib="0" loc="(440,490)" name="Tunnel">
+      <a name="label" val="S_Trigg"/>
+    </comp>
+    <comp lib="0" loc="(170,470)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="S_Trigg"/>
+    </comp>
+    <comp lib="0" loc="(100,160)" name="Tunnel">
+      <a name="width" val="32"/>
+      <a name="label" val="ROM DATA"/>
+    </comp>
+    <comp lib="4" loc="(910,270)" name="Register">
+      <a name="label" val="State"/>
+    </comp>
+    <comp lib="4" loc="(260,60)" name="ROM">
+      <a name="addrWidth" val="15"/>
+      <a name="dataWidth" val="32"/>
+      <a name="label" val="ROM"/>
+      <a name="contents">addr/data: 15 32
+0
+</a>
+    </comp>
+    <comp lib="0" loc="(630,60)" name="Tunnel">
+      <a name="width" val="15"/>
+      <a name="label" val="RAM II ADDR"/>
+    </comp>
+    <comp lib="0" loc="(340,470)" name="Tunnel">
+      <a name="label" val="E_Trigg"/>
+    </comp>
+    <comp lib="0" loc="(70,490)" name="Clock"/>
+    <comp lib="4" loc="(130,260)" name="D Flip-Flop">
+      <a name="Pre/Clr Positions" val="LEGACY"/>
+      <a name="enable" val="true"/>
+      <a name="NewFFLayout" val="false"/>
+    </comp>
+    <comp lib="0" loc="(870,220)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="RamII_Trig"/>
+    </comp>
+    <comp lib="0" loc="(210,320)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="labelloc" val="east"/>
+    </comp>
+    <comp lib="6" loc="(105,245)" name="Text">
+      <a name="text" val="Init Lock"/>
+      <a name="font" val="Dialog plain 12"/>
+    </comp>
+    <comp lib="4" loc="(790,60)" name="RAM">
+      <a name="addrWidth" val="15"/>
+      <a name="dataWidth" val="17"/>
+      <a name="label" val="RAM II"/>
+    </comp>
+  </circuit>
+</project>
