@@ -138,25 +138,25 @@ Disassembly of section .text:
   400641:	e9 7a ff ff ff       	jmp    4005c0 <register_tm_clones>
 
 0000000000400646 <calcular>:
-  400646:	55                   	push   rbp
+  400646:	55                   	push   rbp                          
   400647:	48 89 e5             	mov    rbp,rsp
-  40064a:	48 89 7d e8          	mov    QWORD PTR [rbp-0x18],rdi
-  40064e:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  40064a:	48 89 7d e8          	mov    QWORD PTR [rbp-0x18],rdi     ;   Toma el numero obtenido, calcular(i)
+  40064e:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]     
   400652:	8b 00                	mov    eax,DWORD PTR [rax]
   400654:	89 45 fc             	mov    DWORD PTR [rbp-0x4],eax
   400657:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
-  40065a:	c1 e8 05             	shr    eax,0x5
-  40065d:	83 e8 08             	sub    eax,0x8
+  40065a:	c1 e8 05             	shr    eax,0x5                      ;   i= i >> 5
+  40065d:	83 e8 08             	sub    eax,0x8                      ;   i = i - 8
   400660:	89 45 fc             	mov    DWORD PTR [rbp-0x4],eax
   400663:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
-  400666:	ba a3 8b 2e ba       	mov    edx,0xba2e8ba3
-  40066b:	f7 e2                	mul    edx
-  40066d:	89 d0                	mov    eax,edx
-  40066f:	c1 e8 03             	shr    eax,0x3
-  400672:	89 45 fc             	mov    DWORD PTR [rbp-0x4],eax
+  400666:	ba a3 8b 2e ba       	mov    edx,0xba2e8ba3                
+  40066b:	f7 e2                	mul    edx                          ;   i = i * 0xba2e8ba3
+  40066d:	89 d0                	mov    eax,edx                      ;   i = i >> 32         Se hace para tomar los 32 bits superiores
+  40066f:	c1 e8 03             	shr    eax,0x3                      ;   i = i >> 3
+  400672:	89 45 fc             	mov    DWORD PTR [rbp-0x4],eax      
   400675:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
   400678:	5d                   	pop    rbp
-  400679:	c3                   	ret    
+  400679:	c3                   	ret                                 ;   calcular(i) = {[(i / 2^5) - 8] * 0xba2e8ba3} / 2^35
 
 000000000040067a <main>:
   40067a:	55                   	push   rbp
@@ -178,7 +178,7 @@ Disassembly of section .text:
   4006b0:	01 d0                	add    eax,edx
   4006b2:	29 c1                	sub    ecx,eax
   4006b4:	89 c8                	mov    eax,ecx
-  4006b6:	89 45 f4             	mov    DWORD PTR [rbp-0xc],eax
+  4006b6:	89 45 f4             	mov    DWORD PTR [rbp-0xc],eax      ;   Aqui se asigna un 13 a la ubicacion [rbp-0xc]
   4006b9:	c7 45 f0 00 00 00 00 	mov    DWORD PTR [rbp-0x10],0x0
   4006c0:	bf c8 07 40 00       	mov    edi,0x4007c8
   4006c5:	b8 00 00 00 00       	mov    eax,0x0
@@ -191,10 +191,10 @@ Disassembly of section .text:
   4006e5:	83 45 f0 01          	add    DWORD PTR [rbp-0x10],0x1
   4006e9:	48 8d 45 ec          	lea    rax,[rbp-0x14]
   4006ed:	48 89 c7             	mov    rdi,rax
-  4006f0:	e8 51 ff ff ff       	call   400646 <calcular>
-  4006f5:	3b 45 f4             	cmp    eax,DWORD PTR [rbp-0xc]
-  4006f8:	75 2a                	jne    400724 <main+0xaa>
-  4006fa:	8b 45 f0             	mov    eax,DWORD PTR [rbp-0x10]
+  4006f0:	e8 51 ff ff ff       	call   400646 <calcular>            ;   LLamado a Calcular con el numero obtenido por <__isoc99_scanf@plt>
+  4006f5:	3b 45 f4             	cmp    eax,DWORD PTR [rbp-0xc]      ;   Compara RAX con [rbp-0xc]: calcular(pin) == 13
+  4006f8:	75 2a                	jne    400724 <main+0xaa>           ;   La condición a evitar, reemplazado por No Op en el archvio guess1
+  4006fa:	8b 45 f0             	mov    eax,DWORD PTR [rbp-0x10]     ;   Resolviendo calcular(pin) = 13 se obtiene que pin = 4832
   4006fd:	89 c6                	mov    esi,eax
   4006ff:	bf d2 07 40 00       	mov    edi,0x4007d2
   400704:	b8 00 00 00 00       	mov    eax,0x0

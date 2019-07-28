@@ -34,11 +34,11 @@ extern instr
 global main
 
 main:
-  mov qword[CPU_registers + 8], 42
-  mov qword[CPU_registers + 16], 24
-  instruction_caller 8, 1, 0, 1, 1, 1, 2, RAM, CPU_registers
+	;	Adds a memoria en caso de ser necesarios
+  	instruction_caller 4, 1, 0, 3, 100, 3, 0, RAM, CPU_registers
 
-  mov rax, 60
-  mov rdi, [CPU_registers]
-  syscall
-;exit 0
+	instruction_caller 4, 2, 200, 1, 0, 3, 50, RAM, CPU_registers
+
+	instruction_caller 8, 2, 40, 3, 1000, 2, 200, RAM, CPU_registers
+
+ exit 0

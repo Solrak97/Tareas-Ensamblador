@@ -1,0 +1,68 @@
+     1                                 %line 1+1 maquina_virtual.asm
+     2                                 
+     3                                 
+     4                                 %line 8+1 maquina_virtual.asm
+     5                                 
+     6                                 %line 22+1 maquina_virtual.asm
+     7                                 
+     8                                 
+     9                                 
+    10                                 [section .data]
+    11                                 
+    12 00000000 00<rept>               RAM: times 1024 db 0
+    13 00000400 0000000000000000<rept>       CPU_registers: times 4 dq 0
+    14                                 
+    15                                 
+    16                                 
+    17                                 [section .text]
+    18                                 [extern instr]
+    19                                 [global main]
+    20                                 
+    21                                 main:
+    22                                 
+    23 00000000 40B704                  mov dil, 4
+    24                                 %line 38+0 maquina_virtual.asm
+    25 00000003 40B601                  mov sil, 1
+    26 00000006 48C7C200000000          mov rdx, 0
+    27 0000000D B103                    mov cl, 3
+    28 0000000F 49C7C064000000          mov r8, 100
+    29 00000016 41B103                  mov r9b, 3
+    30 00000019 68[00000000]            push CPU_registers
+    31 0000001E 68[00000000]            push RAM
+    32 00000023 6A00                    push 0
+    33 00000025 E8(F6FFFFFF)            call instr
+    34 0000002A 4883C418                add rsp, 24
+    35                                 %line 39+1 maquina_virtual.asm
+    36                                 
+    37 0000002E 40B704                  mov dil, 4
+    38                                 %line 40+0 maquina_virtual.asm
+    39 00000031 40B602                  mov sil, 2
+    40 00000034 48C7C2C8000000          mov rdx, 200
+    41 0000003B B101                    mov cl, 1
+    42 0000003D 49C7C000000000          mov r8, 0
+    43 00000044 41B103                  mov r9b, 3
+    44 00000047 68[00000000]            push CPU_registers
+    45 0000004C 68[00000000]            push RAM
+    46 00000051 6A32                    push 50
+    47 00000053 E8(F6FFFFFF)            call instr
+    48 00000058 4883C418                add rsp, 24
+    49                                 %line 41+1 maquina_virtual.asm
+    50                                 
+    51 0000005C 40B708                  mov dil, 8
+    52                                 %line 42+0 maquina_virtual.asm
+    53 0000005F 40B602                  mov sil, 2
+    54 00000062 48C7C228000000          mov rdx, 40
+    55 00000069 B103                    mov cl, 3
+    56 0000006B 49C7C0E8030000          mov r8, 1000
+    57 00000072 41B102                  mov r9b, 2
+    58 00000075 68[00000000]            push CPU_registers
+    59 0000007A 68[00000000]            push RAM
+    60 0000007F 68C8000000              push 200
+    61 00000084 E8(F6FFFFFF)            call instr
+    62 00000089 4883C418                add rsp, 24
+    63                                 %line 43+1 maquina_virtual.asm
+    64                                 
+    65 0000008D 48C7C03C000000          mov rax, 60
+    66                                 %line 44+0 maquina_virtual.asm
+    67 00000094 48C7C700000000          mov rdi, 0
+    68 0000009B 0F05                    syscall

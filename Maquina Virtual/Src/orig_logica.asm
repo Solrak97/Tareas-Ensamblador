@@ -1,19 +1,18 @@
 ; ----
 %macro	dref_operands	3	;	%1 reg?, %2 cant mov, 3% destino
 	cmp %1, 1			; Revisa si el operando es registro.
-  	je %%is_reg
-  	cmp %1, 2			; Revisa si el operando es memoria.
-  	je %%is_mem
-  	mov %3, %2			;	Mueve el inmediato al registro parametro
-  	jmp %%end_params
-%%is_reg:				;	%1 es registro
+  je %%is_reg
+  cmp %1, 2			; Revisa si el operando es memoria.
+  je %%is_mem
+  mov %3, %2			;	Mueve el inmediato al registro parametro
+  jmp %%end_params
+%%is_reg:					;	%1 es registro
 	mov rax, qword[r13 + (%2 * 8)]
-	mov %3, rax
-  	jmp %%end_params
-%%is_mem:				     ; %1 es memoria
+  jmp %%end_params
+%%is_mem:				      ; %1 es memoria
 	mov rax, qword[r14 + %2]	;	Mueve el contenido de r14 + %2 a parametro
-	mov %3, rax
 %%end_params:
+mov %3, rax
 %endmacro
 
 ; ----
@@ -23,7 +22,7 @@
 	add %2, r14
 	mov rax, %2
 	jmp %%end_params
-%%is_reg:				;	%1 es registro
+%%is_reg:					;	%1 es registro
 	shl %2, 3
 	add %2, r13
 	mov rax, %2
@@ -34,9 +33,9 @@
 ; ----
 ; Preparación de los registros para hacer call de operacion, sencillo pero conveniente
 %macro oper_prep 3  ; %1 destino, %2 operando 1, %3 operando 2
-  	mov rdi, %1
-  	mov rsi, %2
-  	mov rdx, %3
+  mov rdi, %1
+  mov rsi, %2
+  mov rdx, %3
 %endmacro
 
 ; ----
@@ -85,14 +84,14 @@ ret
 ; ----
 ;	Instruccion de suma
 add_instruction:
-  	add rsi, rdx ; Efectua suma de parametro 2 y 3
-  	mov qword[rdi], rsi ; Mueve resultado a parametro
-  	ret
+  add rsi, rdx ; Efectua suma de parametro 2 y 3
+  mov qword[rdi], rsi ; Mueve resultado a parametro
+  ret
 
 ; ----
 ;	Instruccion de resta
 sub_instruction:
-  	not rdx
-  	add rdx, 1
-  	call add_instruction
-  	ret
+  not rdx
+  add rdx, 1
+  call add_instruction
+  ret

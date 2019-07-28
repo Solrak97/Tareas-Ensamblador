@@ -1,0 +1,160 @@
+     1                                 %line 6+1 regla_falsi.asm
+     2                                 
+     3                                 [section .data]
+     4                                 
+     5 00000000 0000000000000000       zero_constant dq 0.0
+     6 00000008 66616C73655F706F73-    input_message db "false_position_method: Enter the following parameters: <a> <b> <epsilon>: ",0xa ,0
+     7 00000008 6974696F6E5F6D6574-
+     8 00000008 686F643A20456E7465-
+     9 00000008 722074686520666F6C-
+    10 00000008 6C6F77696E67207061-
+    11 00000008 72616D65746572733A-
+    12 00000008 203C613E203C623E20-
+    13 00000008 3C657073696C6F6E3E-
+    14 00000008 3A200A00           
+    15 00000054 256C6620256C662025-    input_format db "%lf %lf %lf",0
+    16 00000054 6C6600             
+    17 00000060 66616C73655F706F73-    output_message db "false_position_method: zero found after %d iterations: %5.5f: ",0xa ,0
+    18 00000060 6974696F6E5F6D6574-
+    19 00000060 686F643A207A65726F-
+    20 00000060 20666F756E64206166-
+    21 00000060 746572202564206974-
+    22 00000060 65726174696F6E733A-
+    23 00000060 2025352E35663A200A-
+    24 00000060 00                 
+    25 000000A0 000000000000F03F00-    const dq 1.0, 3.0, 5.0
+    26 000000A0 000000000008400000-
+    27 000000A0 000000001440       
+    28                                 
+    29                                 
+    30                                 [section .bss]
+    31 00000000 <gap>                  val_x resq 4
+    32 00000020 <gap>                  preimages resq 3
+    33 00000038 <gap>                  images resq 3
+    34 00000050 <gap>                  error_range resq 1
+    35                                 
+    36                                 
+    37                                 [section .text]
+    38                                 
+    39                                 [global main]
+    40                                 [extern printf]
+    41                                 %line 26+0 regla_falsi.asm
+    42                                 [extern scanf]
+    43                                 %line 27+1 regla_falsi.asm
+    44                                 
+    45                                 main:
+    46 00000000 4883EC08                sub rsp, 8
+    47 00000004 48C7C7[00000000]        mov rdi, input_message
+    48 0000000B 30C0                    xor al, al
+    49 0000000D E8(F6FFFFFF)            call printf
+    50                                 
+    51                                 parameters_scann:
+    52 00000012 48C7C7[00000000]        mov rdi, input_format
+    53 00000019 48C7C6[00000000]        mov rsi, preimages
+    54 00000020 48C7C2[10000000]        mov rdx, preimages + 16
+    55 00000027 48C7C1[00000000]        mov rcx, error_range
+    56 0000002E 30C0                    xor al, al
+    57 00000030 E8(F6FFFFFF)            call scanf
+    58                                 
+    59 00000035 4D31D2                  xor r10, r10
+    60                                 calculate_function_zero:
+    61                                 
+    62 00000038 F20F100425[00000000]      movsd xmm0, qword [preimages]
+    63 00000041 E8DC000000              call calculate_image
+    64 00000046 F20F110425[00000000]      movsd qword [images], xmm0
+    65                                 
+    66 0000004F F20F100425[10000000]      movsd xmm0, qword [preimages + 16]
+    67 00000058 E8C5000000              call calculate_image
+    68 0000005D F20F110425[10000000]      movsd qword [images + 16], xmm0
+    69                                 
+    70                                 
+    71 00000066 DD0425[10000000]        fld qword[images + 16]
+    72 0000006D DC0C25[00000000]        fmul qword[preimages]
+    73 00000074 DD0425[00000000]        fld qword[images]
+    74 0000007B DC0C25[10000000]        fmul qword[preimages + 16]
+    75 00000082 DEE1                    fsubrp
+    76 00000084 DD0425[10000000]        fld qword[images + 16]
+    77 0000008B DC2C25[00000000]        fsubr qword[images]
+    78 00000092 DEF9                    fdivp st1, st0
+    79 00000094 DD1C25[08000000]        fstp qword[preimages + 8]
+    80                                 
+    81                                 
+    82 0000009B F20F100425[08000000]      movsd xmm0, qword[preimages + 8]
+    83 000000A4 E879000000              call calculate_image
+    84 000000A9 F20F110425[08000000]      movsd qword [images + 8], xmm0
+    85                                 
+    86                                 
+    87 000000B2 DD0425[08000000]        fld qword[images + 8]
+    88 000000B9 D9E1                    fabs
+    89 000000BB DC1C25[00000000]        fcomp qword[error_range]
+    90 000000C2 9BDFE0                  fstsw ax
+    91 000000C5 9B                      fwait
+    92 000000C6 9E                      sahf
+    93 000000C7 723D                    jb zero_found
+    94                                 
+    95                                 
+    96 000000C9 F20F100C25[08000000]      movsd xmm1, [preimages + 8]
+    97 000000D2 F20F590425[00000000]      mulsd xmm0, [images]
+    98 000000DB 660F2E0425[00000000]      ucomisd xmm0, [zero_constant]
+    99 000000E4 730F                    jae upper_interval
+   100                                 
+   101                                 
+   102 000000E6 F20F110C25[10000000]      movsd [preimages + 16], xmm1
+   103                                 %line 85+0 regla_falsi.asm
+   104 000000EF 49FFC2                  inc r10
+   105 000000F2 E93CFFFFFF              jmp calculate_function_zero
+   106                                 %line 86+1 regla_falsi.asm
+   107                                 
+   108                                 upper_interval:
+   109 000000F7 F20F110C25[00000000]      movsd [preimages + 0], xmm1
+   110                                 %line 88+0 regla_falsi.asm
+   111 00000100 49FFC2                  inc r10
+   112 00000103 E92BFFFFFF              jmp calculate_function_zero
+   113                                 %line 89+1 regla_falsi.asm
+   114                                 
+   115                                 zero_found:
+   116 00000108 48C7C7[00000000]        mov rdi, output_message
+   117 0000010F 4C89D6                  mov rsi, r10
+   118 00000112 F20F100425[08000000]      movsd xmm0, qword[preimages + 8]
+   119 0000011B B001                    mov al, 1
+   120 0000011D E8(F6FFFFFF)            call printf
+   121 00000122 4883C408                add rsp, 8
+   122 00000126 C3                      ret
+   123                                 
+   124                                 calculate_image:
+   125 00000127 F20F110425[00000000]      movsd qword[val_x], xmm0
+   126 00000130 DD0425[08000000]        fld qword[const + 8]
+   127 00000137 DD0425[00000000]        fld qword[val_x]
+   128 0000013E DD0425[00000000]        fld qword[val_x]
+   129 00000145 D8C9                    fmul st0, st1
+   130 00000147 DEC9                    fmulp
+   131 00000149 DEC9                    fmulp
+   132 0000014B DD0425[00000000]        fld qword[val_x]
+   133 00000152 D8C8                    fmul st0, st0
+   134 00000154 DD0425[10000000]        fld qword[const + 16]
+   135 0000015B DEC9                    fmulp
+   136 0000015D DEE9                    fsubp
+   137 0000015F DD0425[00000000]        fld qword[val_x]
+   138 00000166 DEE9                    fsubp
+   139 00000168 DD0425[00000000]        fld qword[const]
+   140 0000016F DEC1                    faddp
+   141 00000171 DD0425[00000000]        fld qword[const]
+   142 00000178 DD0425[00000000]        fld qword[val_x]
+   143 0000017F D8C8                    fmul st0, st0
+   144 00000181 D8C8                    fmul st0, st0
+   145 00000183 DEC1                    faddp
+   146 00000185 DEF9                    fdivp
+   147 00000187 DD0425[00000000]        fld qword[val_x]
+   148 0000018E D9FE                    fsin
+   149 00000190 D9ED                    fldln2
+   150 00000192 DD0425[00000000]        fld qword[val_x]
+   151 00000199 D8C8                    fmul st0, st0
+   152 0000019B DD0425[00000000]        fld qword[val_x]
+   153 000001A2 D8F0                    fdiv st0, st0
+   154 000001A4 DEC1                    faddp
+   155 000001A6 D9F1                    fyl2x
+   156 000001A8 DEC9                    fmulp
+   157 000001AA DEC1                    faddp
+   158 000001AC DD1C25[00000000]        fstp qword[val_x]
+   159 000001B3 F20F100425[00000000]      movsd xmm0, qword[val_x]
+   160 000001BC C3                      ret
