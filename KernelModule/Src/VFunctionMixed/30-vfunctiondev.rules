@@ -1,0 +1,2 @@
+#Reglas para vfunction_dev
+KERNEL=="vfunction_dev", SUBSYSTEM=="vfunction_class", MODE="0666"

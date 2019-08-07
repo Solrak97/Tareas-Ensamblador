@@ -1,0 +1,24 @@
+1) Hello, World: The Simplest Module
+https://www.tldp.org/LDP/lkmpg/2.6/html/x121.html
+
+--------------------
+
+2) Linux Kernel Module Programming: Hello World Program
+
+https://www.geeksforgeeks.org/linux-kernel-module-programming-hello-world-program/
+
+---------------------------------
+
+3) Writing a Simple Linux Kernel Module
+https://blog.sourcerer.io/writing-a-simple-linux-kernel-module-d9dc3762c234
+
+---------------------------------
+
+4) The Linux Kernel Module Programming Guide
+https://www.tldp.org/LDP/lkmpg/2.6/lkmpg.pdf
+
+
+5) Linux Device Drivers 3rd ed. Jonathan Corbet
+
+
+6) https://www.oreilly.com/library/view/linux-device-drivers/0596005903/ch02.html
